@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
  <html lang="en">
  <head>
   <meta charset="UTF-8">
@@ -79,6 +79,32 @@
   const feedbackDisplay = document.getElementById('feedback-display');
   let allFeedback = []; // To store feedback locally
 
+  // **INJECTED JSON DATA HERE**
+  const jsonData = [
+    {
+      "name": "clementine wangui",
+      "phone": "0115401032",
+      "email": "clementine@wangui.com",
+      "photos": ["https://i.ibb.co/FLXCqj4W/IMG-20210518-WA0001.webp", "https://i.ibb.co/YTRFpvNd/IMG-20210530-WA0002.webp","https://i.ibb.co/twxD04gw/IMG-20210530-WA0001.webp","https://i.ibb.co/vxyj9Yks/IMG-20210530-WA0003.webp"],
+      
+    },
+    {
+      "name": "Moses muriithi",
+      "phone": "0108722532",
+      "email": "mose@muriithi.com",
+      "photos": ["https://i.ibb.co/1J9HKGZF/IMG-20250326-174046-899.webp","https://i.ibb.co/XxGKcRWD/IMG-20250326-174035-138.webp",]
+      
+    },
+    {
+      "name": "Peter Kariuki",
+      "phone": "0712345678",
+      "email": "peter.kariuki@example.co.ke",
+      "photos": [],
+      "videos": ["videos/peter_kariuki_1.mov"]
+    }
+    // Add more data objects here as needed
+  ];
+
   // Function to open the lightbox
   function openLightbox(imageSrc) {
   lightboxImage.src = imageSrc;
@@ -109,57 +135,52 @@
 
   mediaResultsContainer.innerHTML = '<p>Searching for media...</p>'; // Indicate loading
 
-  fetch('data.json')
-  .then(response => response.json())
-  .then(data => {
-  mediaResultsContainer.innerHTML = ''; // Clear previous results
+  // **Use the embedded jsonData directly**
+  setTimeout(() => { // Simulate a bit of loading for visual feedback
+    mediaResultsContainer.innerHTML = ''; // Clear previous results
 
-  const person = data.find(item => item.name === name || item.phone === phone || item.email === email);
+    const person = jsonData.find(item => item.name === name || item.phone === phone || item.email === email);
 
-  if (person) {
-  if (person.photos && person.photos.length > 0) {
-  mediaResultsContainer.innerHTML += '<h3>Photos:</h3>';
-  person.photos.forEach(photo => {
-  mediaResultsContainer.innerHTML += `
-  <div>
-  <a href="${photo}" download="${photo.split('/').pop()}" class="download-link">Download</a>
-  <a href="#" class="lightbox-trigger"><img src="${photo}" alt="Photo of ${person.name}" width="200"></a>
-  </div>
-  `;
-  });
+    if (person) {
+      if (person.photos && person.photos.length > 0) {
+        mediaResultsContainer.innerHTML += '<h3>Photos:</h3>';
+        person.photos.forEach(photo => {
+          mediaResultsContainer.innerHTML += `
+            <div>
+              <a href="${photo}" download="${photo.split('/').pop()}" class="download-link">Download</a>
+              <a href="#" class="lightbox-trigger"><img src="${photo}" alt="Photo of ${person.name}" width="200"></a>
+            </div>
+          `;
+        });
 
-  // Add event listeners to the newly created images
-  const imageTriggers = mediaResultsContainer.querySelectorAll('.lightbox-trigger');
-  imageTriggers.forEach(trigger => {
-  trigger.addEventListener('click', function(event) {
-  event.preventDefault();
-  const imageSrc = this.querySelector('img').src;
-  openLightbox(imageSrc);
-  });
-  });
-  }
-  if (person.videos && person.videos.length > 0) {
-  mediaResultsContainer.innerHTML += '<h3>Videos:</h3>';
-  person.videos.forEach(video => {
-  mediaResultsContainer.innerHTML += `
-  <video width="320" height="240" controls>
-  <source src="${video}" type="video/mp4">
-  Your browser does not support the video tag.
-  </video>
-  `;
-  });
-  }
-  if ((!person.photos || person.photos.length === 0) && (!person.videos || person.videos.length === 0)) {
-  mediaResultsContainer.innerHTML = `<p>No media found for ${person.name}.</p>`;
-  }
-  } else {
-  mediaResultsContainer.innerHTML = '<p>No person found with that information.</p>';
-  }
-  })
-  .catch(error => {
-  console.error('Error fetching data:', error);
-  mediaResultsContainer.innerHTML = '<p>An error occurred while fetching data.</p>';
-  });
+        // Add event listeners to the newly created images
+        const imageTriggers = mediaResultsContainer.querySelectorAll('.lightbox-trigger');
+        imageTriggers.forEach(trigger => {
+          trigger.addEventListener('click', function(event) {
+            event.preventDefault();
+            const imageSrc = this.querySelector('img').src;
+            openLightbox(imageSrc);
+          });
+        });
+      }
+      if (person.videos && person.videos.length > 0) {
+        mediaResultsContainer.innerHTML += '<h3>Videos:</h3>';
+        person.videos.forEach(video => {
+          mediaResultsContainer.innerHTML += `
+            <video width="320" height="240" controls>
+              <source src="${video}" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          `;
+        });
+      }
+      if ((!person.photos || person.photos.length === 0) && (!person.videos || person.videos.length === 0)) {
+        mediaResultsContainer.innerHTML = `<p>No media found for ${person.name}.</p>`;
+      }
+    } else {
+      mediaResultsContainer.innerHTML = '<p>No person found with that information.</p>';
+    }
+  }, 500); // Simulate loading time
   });
 
   // Handle feedback submission
