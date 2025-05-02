@@ -1,0 +1,38 @@
+[
+  {
+    "name": "clementine wangui",
+    "phone": "0115401032",
+    "email": "clementine@wangui.cm",
+    "gender": "female",
+    "county": "Kisumu",
+    "photos": ["https://i.ibb.co/VYnGrwxw/IMG-20210518-WA0001.webp", "https://i.ibb.co/F44bhttp/IMG-20210530-WA0002.webp","https://i.ibb.co/VYTKp3jJ/IMG-20210530-WA0001.webp","https://i.ibb.co/XrSsjxRY/IMG-20210530-WA0003.webp"],
+    "videos": []
+  },
+  {
+    "name": "Juma Mwangi",
+    "phone": ["0711223344", "0100555666"],
+    "email": "juma.mwangi@example.co.ke",
+    "gender": "male",
+    "county": "Mombasa",
+    "photos": ["images/juma.jpeg"],
+    "videos": ["videos/juma.mp4"]
+  },
+  {
+    "name": "Akinyi Odongo",
+    "phone": "0722334455",
+    "email": "akinyi.odongo@domain.africa",
+    "gender": "female",
+    "county": "Kisumu",
+    "photos": [],
+    "videos": []
+  },
+  {
+    "name": "Kiprono Kemboi",
+    "phone": "0733445566",
+    "email": "kiprono.kemboi@email.ke",
+    "gender": "male",
+    "county": "Nakuru",
+    "photos": ["images/kiprono1.gif"],
+    "videos": ["videos/kiprono_vid1.avi"]
+  }
+]

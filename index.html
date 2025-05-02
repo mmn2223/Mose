@@ -1,0 +1,192 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find Media</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora&family=Dancing+Script&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+ </head>
+ <body>
+  <form id="personDetailsForm">
+  <table>
+  <tr>
+  <td>Name:</td>
+  <td><input type="text" id="name"></td>
+  </tr>
+  <tr>
+  <td>Phone:</td>
+  <td><input type="tel" id="phone"></td>
+  </tr>
+  <tr>
+  <td>Email:</td>
+  <td><input type="email" id="email"></td>
+  </tr>
+  <tr>
+  <td>Gender:</td>
+  <td>
+  <input type="radio" value="male" name="gender">Male
+  <input type="radio" value="female" name="gender">Female
+  </td>
+  </tr>
+  <tr>
+  <td>County:</td>
+  <td>
+  <select>
+  <option>Nakuru</option>
+  <option>Kisumu</option>
+  <option>Meru</option>
+  <option>Nyeri</option>
+  <option>Other</option>
+  </select>
+  </td>
+  </tr>
+  <tr>
+  <td colspan="2">
+  <button type="submit">Find Media</button> <input type="reset" value="Reset">
+  </td>
+  </tr>
+  </table>
+  </form>
+
+  <div id="mediaResults">
+  </div>
+
+  <div id="imageLightbox" class="lightbox">
+  <span class="lightbox-close">&times;</span>
+  <img class="lightbox-content" id="lightboxImage">
+  </div>
+
+  <div id="feedback-section">
+  <h3>Feedback</h3>
+  <form id="feedback-form">
+  <textarea id="feedback-text" placeholder="Share your feedback here..."></textarea>
+  <button type="submit">Submit Feedback</button>
+  </form>
+  <div id="feedback-display">
+  </div>
+  </div>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+  const personDetailsForm = document.getElementById('personDetailsForm');
+  const mediaResultsContainer = document.getElementById('mediaResults');
+  const imageLightbox = document.getElementById('imageLightbox');
+  const lightboxImage = document.getElementById('lightboxImage');
+  const lightboxCloseButton = document.querySelector('.lightbox-close');
+  const feedbackForm = document.getElementById('feedback-form');
+  const feedbackTextarea = document.getElementById('feedback-text');
+  const feedbackDisplay = document.getElementById('feedback-display');
+  let allFeedback = []; // To store feedback locally
+
+  // Function to open the lightbox
+  function openLightbox(imageSrc) {
+  lightboxImage.src = imageSrc;
+  imageLightbox.style.display = "block";
+  }
+
+  // Function to close the lightbox
+  function closeLightbox() {
+  lightboxImage.style.display = "none";
+  }
+
+  // Close lightbox when the close button is clicked
+  lightboxCloseButton.addEventListener('click', closeLightbox);
+
+  // Close lightbox if the user clicks outside the image
+  imageLightbox.addEventListener('click', function(event) {
+  if (event.target === imageLightbox) {
+  closeLightbox();
+  }
+  });
+
+  personDetailsForm.addEventListener('submit', function(event) {
+  event.preventDefault(); // Stop the default form submission
+
+  const name = document.getElementById('name').value;
+  const phone = document.getElementById('phone').value;
+  const email = document.getElementById('email').value;
+
+  mediaResultsContainer.innerHTML = '<p>Searching for media...</p>'; // Indicate loading
+
+  fetch('data.json')
+  .then(response => response.json())
+  .then(data => {
+  mediaResultsContainer.innerHTML = ''; // Clear previous results
+
+  const person = data.find(item => item.name === name || item.phone === phone || item.email === email);
+
+  if (person) {
+  if (person.photos && person.photos.length > 0) {
+  mediaResultsContainer.innerHTML += '<h3>Photos:</h3>';
+  person.photos.forEach(photo => {
+  mediaResultsContainer.innerHTML += `
+  <div>
+  <a href="${photo}" download="${photo.split('/').pop()}" class="download-link">Download</a>
+  <a href="#" class="lightbox-trigger"><img src="${photo}" alt="Photo of ${person.name}" width="200"></a>
+  </div>
+  `;
+  });
+
+  // Add event listeners to the newly created images
+  const imageTriggers = mediaResultsContainer.querySelectorAll('.lightbox-trigger');
+  imageTriggers.forEach(trigger => {
+  trigger.addEventListener('click', function(event) {
+  event.preventDefault();
+  const imageSrc = this.querySelector('img').src;
+  openLightbox(imageSrc);
+  });
+  });
+  }
+  if (person.videos && person.videos.length > 0) {
+  mediaResultsContainer.innerHTML += '<h3>Videos:</h3>';
+  person.videos.forEach(video => {
+  mediaResultsContainer.innerHTML += `
+  <video width="320" height="240" controls>
+  <source src="${video}" type="video/mp4">
+  Your browser does not support the video tag.
+  </video>
+  `;
+  });
+  }
+  if ((!person.photos || person.photos.length === 0) && (!person.videos || person.videos.length === 0)) {
+  mediaResultsContainer.innerHTML = `<p>No media found for ${person.name}.</p>`;
+  }
+  } else {
+  mediaResultsContainer.innerHTML = '<p>No person found with that information.</p>';
+  }
+  })
+  .catch(error => {
+  console.error('Error fetching data:', error);
+  mediaResultsContainer.innerHTML = '<p>An error occurred while fetching data.</p>';
+  });
+  });
+
+  // Handle feedback submission
+  feedbackForm.addEventListener('submit', function(event) {
+  event.preventDefault();
+  const feedbackText = feedbackTextarea.value.trim();
+  if (feedbackText) {
+  allFeedback.push(feedbackText);
+  renderFeedback();
+  feedbackTextarea.value = ''; // Clear the textarea
+  }
+  });
+
+  // Function to render the feedback on the page
+  function renderFeedback() {
+  feedbackDisplay.innerHTML = '';
+  allFeedback.forEach(feedback => {
+  const feedbackItem = document.createElement('div');
+  feedbackItem.classList.add('feedback-item');
+  feedbackItem.textContent = feedback;
+  feedbackDisplay.appendChild(feedbackItem);
+  });
+  }
+
+  // Initial rendering of any existing feedback (if you were to store it persistently)
+  renderFeedback();
+  });
+  </script>
+ </body>
+ </html>

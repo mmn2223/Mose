@@ -1,0 +1,206 @@
+body {
+    font-family: 'Lora', serif; /* Graceful serif for body */
+    background-color: #fdecec; /* Soft blush background */
+    color: #706464; /* Muted rose-brown */
+    margin: 40px;
+    line-height: 1.7;
+}
+
+h3 {
+    font-family: 'Dancing Script', cursive; /* Flowing script for headings */
+    color: #c8a2c8; /* Soft lavender */
+    border-bottom: 1px solid #f4caca; /* Delicate light pink border */
+    padding-bottom: 10px;
+    margin-top: 40px;
+    font-size: 2.8em; /* Larger, more prominent heading */
+    font-weight: 400;
+}
+
+table {
+    width: auto;
+    margin-bottom: 35px;
+    border-collapse: collapse;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.02); /* Very soft shadow */
+    background-color: #fffafa; /* Creamy white */
+    border-radius: 15px; /* Even softer rounded corners */
+    overflow: hidden;
+    border: 1px solid #f4caca; /* Delicate light pink border */
+}
+
+th, td {
+    padding: 14px 22px;
+    text-align: left;
+    border-bottom: 1px solid #f4caca;
+}
+
+th {
+    background-color: #f4caca; /* Light pink header */
+    font-weight: bold;
+    color: #886f6f;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+select {
+    padding: 10px;
+    border: 1px solid #e0b0b0; /* Soft rose border */
+    border-radius: 8px;
+    box-sizing: border-box;
+    width: 100%;
+    margin-top: 8px;
+    font-size: 16px;
+    background-color: #fff5f5; /* Very light pink input background */
+}
+
+input[type="radio"] {
+    margin-right: 8px;
+}
+
+button[type="submit"],
+input[type="reset"] {
+    background-color: #e6a8d7; /* Soft purple-pink */
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+button[type="submit"]:hover,
+input[type="reset"]:hover {
+    background-color: #d18ac7;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+#mediaResults {
+    margin-top: 40px;
+}
+
+#mediaResults img {
+    border-radius: 10px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
+}
+
+#mediaResults video {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
+    margin-bottom: 25px;
+}
+
+/* Lightbox styles */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(253, 236, 236, 0.8); /* Soft blush overlay */
+}
+
+.lightbox-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 95%;
+    max-height: 95%;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    background-color: #fffafa; /* Creamy white lightbox background */
+    padding: 25px;
+}
+
+.lightbox-content img {
+    display: block;
+    width: auto;
+    max-height: 90vh;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    color: #c8a2c8; /* Soft lavender close button */
+    font-size: 40px;
+    font-weight: bold;
+    transition: color 0.3s ease, opacity 0.3s ease;
+    cursor: pointer;
+    opacity: 0.7;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.lightbox-close:hover,
+.lightbox-close:focus {
+    color: #b08bb0;
+    text-decoration: none;
+    opacity: 1;
+}
+
+/* Feedback area styles */
+#feedback-section {
+    margin-top: 50px;
+    padding: 30px;
+    border: 1px solid #f4caca; /* Delicate light pink border */
+    border-radius: 15px;
+    background-color: #fffafa; /* Creamy white background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.02);
+}
+
+#feedback-form textarea {
+    width: 100%;
+    margin-bottom: 25px;
+    padding: 12px;
+    border: 1px solid #e0b0b0; /* Soft rose border */
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-size: 16px;
+    background-color: #fff;
+}
+
+#feedback-form button {
+    background-color: #e6a8d7; /* Soft purple-pink button */
+    color: white;
+    padding: 14px 26px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+#feedback-form button:hover {
+    background-color: #d18ac7;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+#feedback-display {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #f4caca; /* Delicate light pink top border */
+}
+
+.feedback-item {
+    margin-bottom: 20px;
+    padding: 16px;
+    border: 1px solid #fff;
+    background-color: #fdecec; /* Soft blush for feedback items */
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01); /* Very subtle shadow */
+}
