@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+  <title>valentine gift</title>
+</head>
+
+<body>
+  <button id="show-button">Press Me Margaret Wanjiku</button>
+
+  <div id="valentine-content" class="hidden">
+    <div class="heart"></div>
+    <h1>love you friend 
+    </h1>
+  </div>
+
+ <audio id="love-song" loop>
+  <source src="/Johnny_Drille_-_How_Are_You_[My_Friend]_-__Performance_Video_(256k).mp3" type="audio/mpeg">
+</audio>
+
+
+
+  <script>
+    const showButton = document.getElementById('show-button');
+    const valentineContent = document.getElementById('valentine-content');
+    const loveSong = document.getElementById('love-song');
+
+    showButton.addEventListener('click', () => {
+      // Hide the button and show the content with the fade-in effect
+      showButton.classList.add('hidden');
+      valentineContent.classList.remove('hidden');
+
+      // Play the song when the button is clicked
+      loveSong.play();
+    });
+  </script>
+</body>
+
+</html>

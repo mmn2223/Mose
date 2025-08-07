@@ -1,0 +1,102 @@
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* Soft pink background for a romantic feel */
+  background: #fdf2f7; 
+}
+
+/* New CSS class for hiding and fading in content */
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+  display: none;
+  transition: opacity 1s ease-in, visibility 0s 1s;
+}
+
+#valentine-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 2s ease-in; /* Fade-in effect */
+}
+
+/* The button now has a soft, elegant look */
+button {
+  padding: 12px 28px;
+  font-size: 1.8rem;
+  font-family: 'Sacramento', cursive;
+  color: #fff;
+  background: #f77c9f; /* A darker pink for contrast */
+  border: none;
+  border-radius: 50px; /* Fully rounded button */
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(247, 124, 159, 0.5);
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+  transform: scale(1.1);
+  background: #e06d90;
+}
+
+button.hidden {
+  display: none;
+}
+
+.heart {
+  height: 80px; /* Slightly larger heart */
+  width: 80px;
+  background: #f7a5b3; /* Softer pink heart color */
+  position: relative;
+  box-shadow: 0 0 50px #f7a5b3; /* A softer, diffused glow */
+  animation: heartbeat 3s linear infinite;
+  transform: rotate(-45deg);
+}
+
+.heart:before {
+  content: '';
+  position: absolute;
+  height: 80px;
+  width: 80px;
+  background: #f7a5b3;
+  top: -50%;
+  border-radius: 50px;
+  box-shadow: 0 0 50px #f7a5b3;
+}
+
+.heart:after {
+  content: '';
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background: #f7a5b3;
+  right: -50%;
+  border-radius: 50px;
+  box-shadow: 0 0 50px #f7a5b3;
+}
+
+@keyframes heartbeat {
+  0% {
+    transform: scale(1) rotate(-45deg);
+  }
+  50% {
+    transform: scale(1.2) rotate(-45deg); /* Slightly bigger pulse */
+  }
+  100% {
+    transform: scale(1) rotate(-45deg);
+  }
+}
+
+h1 {
+  color: #d14972; /* A deep rose color for the message */
+  font-family: 'Sacramento', cursive;
+  font-size: 4rem; /* Larger, more elegant font size */
+  margin-top: 50px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
